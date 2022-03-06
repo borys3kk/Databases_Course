@@ -1,2 +1,4 @@
-# Databases_Course
-Solutions from databases course at AGH UST 
+# Solutions from Basics of Databases course
+AGH UST 2021/2022
+
+Final grade from this part: 4.5
