@@ -1,0 +1,24 @@
+--1. Wybierz nazwy i numery telefonów klientów , którym w 1997 roku przesyłki dostarczała firma United Package.
+--
+-- select distinct CompanyName, Phone
+-- from Orders
+--          join Customers on Orders.CustomerID = Customers.CustomerID
+-- where year(ShippedDate) = 1997
+--   and ShipVia = (select ShipperID from Shippers where CompanyName = 'United Package')
+--2. Wybierz nazwy i numery telefonów klientów, którzy kupowali produkty z kategorii Confections.
+--
+-- select c.CompanyName, c.Phone
+-- from Customers c
+-- where c.CustomerID in (select distinct o.customerid
+--                        from Orders o
+--                                 join [Order Details] od on o.OrderID = od.OrderID
+--                                 join Products p on od.ProductID = p.ProductID
+--                                 join Categories cat on p.CategoryID = cat.CategoryID
+--                        where cat.CategoryName = 'Confections')
+--3. Podaj łączną wartość zamówienia o numerze 10250 (uwzględnij cenę za przesyłkę)
+-- select sum((1 - od.Discount) * od.UnitPrice * od.Quantity) +
+--        (select o.Freight from Orders o where o.OrderID = od.OrderID) as suma,
+--        od.OrderID
+-- from [Order Details] od
+-- where od.OrderID = 10250
+-- group by od.OrderID
